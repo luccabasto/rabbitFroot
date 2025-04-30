@@ -6,7 +6,7 @@ using RabbitMQ.Client;
 
 record FruitPayload(string Timestamp, string Name, string Description);
 
-class Program
+class SendFrutas
 {
     static async Task Main()
     {
