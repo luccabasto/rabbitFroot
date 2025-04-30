@@ -10,6 +10,7 @@
 Está aplicação foi desenvolvida pelos devs:
 
 * Lucas E.S. Basto - RM553771
+* Kevin Nobre - RM552590
 
 ---
 
