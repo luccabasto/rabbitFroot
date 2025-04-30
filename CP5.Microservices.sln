@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35825.156
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiverFrutas", "ReceiverFrutas\ReceiverFrutas.csproj", "{3F3C0F1F-C1F4-D389-660F-D2F9E039AFB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiverUsuarios", "ReceiverUsuarios\ReceiverUsuarios.csproj", "{971F7481-44C9-B271-7558-A8FD7909EB44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SenderFrutas", "SenderFrutas\SenderFrutas.csproj", "{72F1BC2F-3C12-BA2B-24A5-C461F8C07FE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SenderUsuarios", "SenderUsuarios\SenderUsuarios.csproj", "{B6D629BB-6B17-6F09-F48F-0291C945BFB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validador", "Validador\Validador.csproj", "{EC341A95-9C11-8B08-2567-33A65D3B82DD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{380A7511-A354-6D7A-0CC0-8FA1F1BA7B6C}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3F3C0F1F-C1F4-D389-660F-D2F9E039AFB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F3C0F1F-C1F4-D389-660F-D2F9E039AFB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F3C0F1F-C1F4-D389-660F-D2F9E039AFB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F3C0F1F-C1F4-D389-660F-D2F9E039AFB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{971F7481-44C9-B271-7558-A8FD7909EB44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{971F7481-44C9-B271-7558-A8FD7909EB44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{971F7481-44C9-B271-7558-A8FD7909EB44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{971F7481-44C9-B271-7558-A8FD7909EB44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72F1BC2F-3C12-BA2B-24A5-C461F8C07FE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72F1BC2F-3C12-BA2B-24A5-C461F8C07FE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72F1BC2F-3C12-BA2B-24A5-C461F8C07FE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72F1BC2F-3C12-BA2B-24A5-C461F8C07FE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6D629BB-6B17-6F09-F48F-0291C945BFB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6D629BB-6B17-6F09-F48F-0291C945BFB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6D629BB-6B17-6F09-F48F-0291C945BFB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6D629BB-6B17-6F09-F48F-0291C945BFB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC341A95-9C11-8B08-2567-33A65D3B82DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC341A95-9C11-8B08-2567-33A65D3B82DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC341A95-9C11-8B08-2567-33A65D3B82DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC341A95-9C11-8B08-2567-33A65D3B82DD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {12EC0831-E1BE-4F5F-B6C4-ADE112EE36B5}
+	EndGlobalSection
+EndGlobal

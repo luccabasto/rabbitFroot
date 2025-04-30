@@ -1,0 +1,67 @@
+# ----------------------------
+# Visual Studio & .NET Core
+# ----------------------------
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Build results
+[Bb]in/
+[Oo]bj/
+out/
+publish/
+TestResults/
+
+# VS Code
+.vscode/
+.vs/
+
+# Visual Studio for Mac
+.vscode/*
+
+# Rider
+.idea/
+*.sln.iml
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# NuGet
+*.nupkg
+*.snupkg
+.packages/
+.nuget/
+**/packages/*
+
+# JetBrains
+_ReSharper*/
+*.DotSettings.user
+
+# ----------------------------
+# Docker
+# ----------------------------
+
+# Ignore Docker Compose overrides (se só usar o docker-compose.yml oficial)
+docker-compose.override.yml
+
+# ----------------------------
+# OS Generated
+# ----------------------------
+
+# Windows thumbnail cache files
+Thumbs.db
+ehthumbs.db
+
+# macOS
+.DS_Store
+
+# Linux
+*~
