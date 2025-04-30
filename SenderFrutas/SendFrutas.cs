@@ -1,46 +1,68 @@
-﻿using System;
+﻿/*
+ * SendFrutas.cs
+ * Producer de Frutas da Época
+ * Fluxo: SendFrutas → Broker (“fiap.exchange”) → Validation
+ */
+
+using RabbitMQ.Client;
+using System;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using RabbitMQ.Client;
 
+// Payload de fruta: timestamp, nome e descrição
 record FruitPayload(string Timestamp, string Name, string Description);
 
-class SendFrutas
+public class SendFrutas
 {
-    static async Task Main()
+    public static async Task Main()
     {
+        // 1) Cria factory e conexão
         var factory = new ConnectionFactory { HostName = "localhost" };
-        await using var conn = await factory.CreateConnectionAsync();
-        await using var channel = await conn.CreateChannelAsync();
+        using var connection = await factory.CreateConnectionAsync();
+        using var channel = await connection.CreateChannelAsync();
 
-        // Declara o exchange do tipo Topic
-        channel.ExchangeDeclare("fiap.exchange", ExchangeType.Topic, durable: true);
+        // 2) Declara exchange do tipo Topic
+        const string exchange = "fiap.exchange";
+        await channel.ExchangeDeclareAsync(exchange, ExchangeType.Topic, durable: true);
 
-        // Constantes de routing
-        const string RkSend = "frutas.epoca";
-        const string QueueVal = "frutas.validate";
+        // 3) Declara fila de validação e faz bind
+        const string queueValidate = "frutas.validate";
+        const string routingKey = "frutas.epoca";
+        await channel.QueueDeclareAsync(
+            queue: queueValidate,
+            durable: true,
+            exclusive: false,
+            autoDelete: false,
+            arguments: null
+        );
+        await channel.QueueBindAsync(
+            queue: queueValidate,
+            exchange: exchange,
+            routingKey: routingKey,
+            arguments: null
+        );
 
-        // Declara fila de validação e faz bind
-        await channel.QueueDeclareAsync(QueueVal, durable: true, exclusive: false, autoDelete: false);
-        channel.QueueBind("frutas.validate", "fiap.exchange", RkSend);
-
+        // 4) Lê dados do usuário
         Console.Write("Nome da fruta: ");
         var name = Console.ReadLine() ?? "";
         Console.Write("Descrição: ");
         var desc = Console.ReadLine() ?? "";
-        var payload = new FruitPayload(DateTime.Now.ToString("O"), name, desc);
-        var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(payload));
 
-        // Publica no exchange com routing-key → chegará em “frutas.validate”
+        // 5) Serializa payload e converte em bytes
+        var payload = new FruitPayload(DateTime.Now.ToString("O"), name, desc);
+        var json = JsonSerializer.Serialize(payload);
+        var body = Encoding.UTF8.GetBytes(json);
+
+        // 6) Publica no exchange com routing-key
+        var basicProperties = new BasicProperties(); // Substitui o método inexistente
         await channel.BasicPublishAsync(
-            exchange: "fiap.exchange",
-            routingKey: RkSend,
+            exchange: exchange,
+            routingKey: routingKey,
             mandatory: false,
-            basicProperties: null,
+            basicProperties: basicProperties, // Usa a instância criada
             body: body
         );
 
-        Console.WriteLine($"[SenderFrutas] Enviado → {JsonSerializer.Serialize(payload)}");
+        Console.WriteLine($"[SendFrutas] Enviado → {json}");
     }
 }

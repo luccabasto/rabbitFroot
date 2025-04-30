@@ -18,9 +18,9 @@ class ReceiverUsuarios
         const string QueueOut = "usuarios.receiver";
         const string RkUserOut = "usuarios.validated";
 
-        channel.ExchangeDeclare("fiap.exchange", ExchangeType.Topic, durable: true);
+        channel.ExchangeDeclareAsync("fiap.exchange", ExchangeType.Topic, durable: true);
         await channel.QueueDeclareAsync(QueueOut, durable: true, exclusive: false, autoDelete: false);
-        channel.QueueBind(QueueOut, "fiap.exchange", RkUserOut);
+        channel.QueueBindAsync(QueueOut, "fiap.exchange", RkUserOut);
 
         var consumer = new AsyncEventingBasicConsumer(channel);
         consumer.ReceivedAsync += async (s, ea) =>

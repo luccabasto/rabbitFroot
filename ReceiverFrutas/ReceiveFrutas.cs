@@ -18,9 +18,9 @@ class ReceiverFrutas
         const string QueueOut = "frutas.receiver";
         const string RkFrutaOut = "frutas.validated";
 
-        channel.ExchangeDeclare("fiap.exchange", ExchangeType.Topic, durable: true);
+        channel.ExchangeDeclareAsync("fiap.exchange", ExchangeType.Topic, durable: true);
         await channel.QueueDeclareAsync(QueueOut, durable: true, exclusive: false, autoDelete: false);
-        channel.QueueBind(QueueOut, "fiap.exchange", RkFrutaOut);
+        channel.QueueBindAsync(QueueOut, "fiap.exchange", RkFrutaOut);
 
         var consumer = new AsyncEventingBasicConsumer(channel);
         consumer.ReceivedAsync += async (s, ea) =>

@@ -18,7 +18,7 @@ class Validation
         await using var conn = await factory.CreateConnectionAsync();
         await using var channel = await conn.CreateChannelAsync();
 
-        channel.ExchangeDeclare("fiap.exchange", ExchangeType.Topic, durable: true);
+        channel.ExchangeDeclareAsync("fiap.exchange", ExchangeType.Topic, durable: true);
 
         // Filas e routing-keys
         const string QfVal = "frutas.validate";
@@ -31,8 +31,8 @@ class Validation
         // Declara e bind
         await channel.QueueDeclareAsync(QfVal, durable: true, exclusive: false, autoDelete: false);
         await channel.QueueDeclareAsync(QuVal, durable: true, exclusive: false, autoDelete: false);
-        channel.QueueBind(QfVal, "fiap.exchange", RkFrutaIn);
-        channel.QueueBind(QuVal, "fiap.exchange", RkUserIn);
+        channel.QueueBindAsync(QfVal, "fiap.exchange", RkFrutaIn);
+        channel.QueueBindAsync(QuVal, "fiap.exchange", RkUserIn);
 
         var consumer = new AsyncEventingBasicConsumer(channel);
         consumer.ReceivedAsync += async (s, ea) =>
@@ -46,7 +46,13 @@ class Validation
                 bool ok = !string.IsNullOrWhiteSpace(fp.Name) && !string.IsNullOrWhiteSpace(fp.Description);
                 var vr = new ValidationResult(fp.Timestamp, fp.Name, ok);
                 var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(vr));
-                await channel.BasicPublishAsync("fiap.exchange", RkFrutaOut, false, null, body);
+
+                // Criação das propriedades básicas
+                var properties = new BasicProperties
+                {
+                    Persistent = true // Example of setting a property
+                };
+                await channel.BasicPublishAsync("fiap.exchange", RkFrutaOut, false, properties, body);
                 Console.WriteLine($"[Validation] Fruta “{fp.Name}” {(ok ? "válida" : "inválida")}");
             }
             else if (rk == RkUserIn)
@@ -57,7 +63,11 @@ class Validation
                 bool ok = validCpfs.Contains(up.CPF);
                 var vr = new ValidationResult(up.Timestamp, up.FullName, ok);
                 var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(vr));
-                await channel.BasicPublishAsync("fiap.exchange", RkUserOut, false, null, body);
+                var properties = new BasicProperties
+                {
+                    Persistent = true // Example of setting a property
+                };
+                await channel.BasicPublishAsync("fiap.exchange", RkUserOut, false, properties, body);
                 Console.WriteLine($"[Validation] Usuário “{up.FullName}” {(ok ? "válido" : "inválido")}");
             }
         };
