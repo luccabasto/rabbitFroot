@@ -6,7 +6,7 @@ using RabbitMQ.Client;
 
 record UserPayload(string Timestamp, string FullName, string Address, string RG, string CPF);
 
-class Program
+class SendUsuarios
 {
     static async Task Main()
     {

@@ -10,7 +10,7 @@ record FruitPayload(string Timestamp, string Name, string Description);
 record UserPayload(string Timestamp, string FullName, string Address, string RG, string CPF);
 record ValidationResult(string Timestamp, string Code, bool IsValid);
 
-class Program
+class Validation
 {
     static async Task Main()
     {

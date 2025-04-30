@@ -7,7 +7,7 @@ using RabbitMQ.Client.Events;
 
 record ValidationResult(string Timestamp, string Code, bool IsValid);
 
-class Program
+class ReceiverFrutas
 {
     static async Task Main()
     {
